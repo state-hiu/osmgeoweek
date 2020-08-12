@@ -5,18 +5,18 @@
 .fill-lightblue { background-color:#d7f0f6; }
 .fill-dark { background-color:#202020; }
 .fill-brown { background-color:#d7a64a; }
-.fill-green { background-color:#ff4b4b; }
+.fill-green { background-color:#4bff8b; }
 .fill-red-orange { background-color:#ef4815; }
 .fill-bold-blue { background-color:#00beec; }
 
 .button.fill-green:hover {
-  background-color: #ff4b4b;
+  background-color: #4bff8b;
 }
 .text-blue { color:#31b2d0; }
 .text-lightblue { color:#d7f0f6; }
 .text-dark { color:#202020; }
 .text-brown { color:#d7a64a; }
-.text-green { color:#ff4b4b; }
+.text-green { color:#4bff8b; }
 .text-red-orange { color:#ef4815; }
 .text-bold-blue { color:#00beec; }
 .text-white { color:#fff;}
@@ -28,7 +28,7 @@
 
 a {
   
-  color: #ff4b4b;
+  color: #4bff8b;
   /*
   color: #00beec;
   */
