@@ -1,0 +1,129 @@
+---
+layout: default
+title: Events
+twitter-description: Sign up for an event near you or plan your own mapathon. You can contribute to mapping projects around the world and explore the power of maps! Get in touch, we're happy to help!
+---
+
+<div class='fill-green dark'>
+  <div class='limiter'>
+    <div class='pad2y'>
+      <h1 class='space-bottom1 space-top4'>Events</h1>
+      <p class='prose-big'> Find an event near you. Or, let us know if you are <a style="color:black" href="{{site.baseurl}}/plan/">planning an event</a>, <a style="color:black" href="https://docs.google.com/forms/d/e/1FAIpQLScdvsMHLor8mrDrHa-BQs2XzFb96vIrx3u--LHXWd1g7RncPg/viewform">submit the details</a> or <a style="color:black" href="mailto:osmgeoweek@gmail.com">get in touch</a>!</p>
+    </div>
+  </div>
+</div>
+
+{% include map.html %}
+
+
+<div class='pad2y'>
+    <div class='limiter'>
+        <div class='col12 pad1y'>
+
+          <div id='events'></div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+<script type="text/javascript">
+
+//using html templating
+//https://stackoverflow.com/questions/18673860/defining-a-html-template-to-append-using-jquery
+
+//loop through all events
+// create a variable to store the products 'database' in
+var events;
+
+// use fetch to retrieve it, and report any errors that occur in the fetch operation
+// once the products have been successfully loaded and formatted as a JSON object
+// using response.json(), run the initialize() function
+fetch('https://u14aazd2zf.execute-api.us-east-1.amazonaws.com/dev/events').then(function(response) {
+    if (response.ok) {
+        response.json().then(function(json) {
+            console.log('response is ok');
+            events = json;
+            console.log('print events');
+            console.log(events.length);
+            //initialize();
+
+            events.sort(function(a,b){
+              // Turn your strings into dates, and then subtract them
+              // to get a value that is either negative, positive, or zero.
+              return new Date(a.date) - new Date(b.date);
+            });
+
+            for (i = 0; i < events.length; i++) {
+
+                console.log(events[i]);
+
+                var t = document.querySelector('#mytemplate');
+
+                // set
+                //t.content.querySelector('img').src = 'demo.png';
+                t.content.querySelector('#title').textContent = events[i].mapping_party_name;
+                t.content.querySelector('#location').textContent = events[i].location;
+                t.content.querySelector('#country').textContent = events[i].country;
+                //t.content.querySelector('#time').textContent = events[i].start_time;
+                t.content.querySelector('#date').textContent = events[i].date;
+                t.content.querySelector('#organization').textContent = events[i].org_name;
+                t.content.querySelector('#sign_up_link').textContent = events[i].sign_up_link;
+
+                // https://www.digitalocean.com/community/tutorials/how-to-modify-attributes-classes-and-styles-in-the-dom
+                t.content.querySelector('#sign_up_link').setAttribute('href', events[i].sign_up_link);
+
+                console.log('print date');
+                console.log(events[i].date);
+
+                var date1 = new Date('11/8/2019');
+
+                console.log('print date1');
+                console.log(date1);
+
+                if (new Date(events[i].date) >= date1) {
+                  // add to document DOM
+                  var clone = document.importNode(t.content, true); // where true means deep copy
+                  document.querySelector('#events').appendChild(clone);
+                }
+
+                
+
+            }
+
+
+
+        });
+    } else {
+        console.log('Network request for products.json failed with response ' + response.status + ': ' + response.statusText);
+    }
+});
+</script>
+
+
+
+<template id="mytemplate">
+
+<div class='col12 pad1y clearfix {% if item.highlight == true %}highlight{% endif %}'>
+  <div>
+    <div class='headline clearfix space-bottom1'>
+      <h2 id="title"></h2>
+
+      <span class='text-right quiet' id="location"></span> , <span class='text-right quiet' id="country"></span> | <span class='strong'><span id="date"></span></span>
+
+    </div>
+
+
+    <div class='prose schedule'>
+      <div>organization: <span id="organization"></span></div>
+      <div>sign-up: <a id="sign_up_link"><span id="sign_up_link"></span></a></div>
+    </div>
+
+  </div>
+</div>
+
+</template>
+
+
