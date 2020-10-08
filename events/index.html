@@ -41,7 +41,7 @@ var events;
 // use fetch to retrieve it, and report any errors that occur in the fetch operation
 // once the products have been successfully loaded and formatted as a JSON object
 // using response.json(), run the initialize() function
-fetch('https://u14aazd2zf.execute-api.us-east-1.amazonaws.com/dev/events').then(function(response) {
+fetch('https://o5sxlalqle.execute-api.us-east-1.amazonaws.com/dev/events').then(function(response) {
     if (response.ok) {
         response.json().then(function(json) {
             console.log('response is ok');
@@ -64,12 +64,12 @@ fetch('https://u14aazd2zf.execute-api.us-east-1.amazonaws.com/dev/events').then(
 
                 // set
                 //t.content.querySelector('img').src = 'demo.png';
-                t.content.querySelector('#title').textContent = events[i].mapping_party_name;
+                t.content.querySelector('#title').textContent = events[i].event_name;
                 t.content.querySelector('#location').textContent = events[i].location;
                 t.content.querySelector('#country').textContent = events[i].country;
                 //t.content.querySelector('#time').textContent = events[i].start_time;
                 t.content.querySelector('#date').textContent = events[i].date;
-                t.content.querySelector('#organization').textContent = events[i].org_name;
+                //t.content.querySelector('#organization').textContent = events[i].org_name;
                 t.content.querySelector('#sign_up_link').textContent = events[i].sign_up_link;
 
                 // https://www.digitalocean.com/community/tutorials/how-to-modify-attributes-classes-and-styles-in-the-dom
@@ -117,7 +117,7 @@ fetch('https://u14aazd2zf.execute-api.us-east-1.amazonaws.com/dev/events').then(
 
 
     <div class='prose schedule'>
-      <div>organization: <span id="organization"></span></div>
+      <!--<div>organization: <span id="organization"></span></div>-->
       <div>sign-up: <a id="sign_up_link"><span id="sign_up_link"></span></a></div>
     </div>
 
