@@ -7,7 +7,7 @@ tags:
   - planner
 ---
 
-Here are helpful tips for organizing an event, from recruiting participants, logistics on the day, to follow up.
+Here are helpful tips for organizing an in-person mapathon, from recruiting participants, logistics on the day, to follow up.
 
 Also, there are even more good ideas for event planning on the <a href="http://wiki.openstreetmap.org/wiki/Mapping_Weekend_Howto">OSM Mapping Weekend HOWTO</a> wiki page.
 
