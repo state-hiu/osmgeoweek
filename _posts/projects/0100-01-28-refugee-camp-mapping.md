@@ -6,7 +6,7 @@ layout: project
 #thumbnail: '../img/post-images/anemia_peru.jpg'
 tags:
   - remote
-permalink: project/car_mapping
+permalink: project/refugee_site_mapping
 aoi:
   - north:
     south:
