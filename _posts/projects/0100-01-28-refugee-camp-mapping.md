@@ -3,7 +3,7 @@ title: 'Refugee Site Mapping, Ethiopia'
 subtitle: "Ongoing collaboration by CartONG, Missing Maps, and MapGive, along with their communities of volunteers is supporting mapping of several refugee camps that are not mapped."
 category: project
 layout: project
-#thumbnail: '../img/post-images/anemia_peru.jpg'
+thumbnail: '../img/projects/Refugee_Site_Mapping_Ethiopia.png'
 tags:
   - remote
 permalink: project/refugee_site_mapping
