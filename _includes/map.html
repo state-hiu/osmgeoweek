@@ -19,7 +19,7 @@ L.tileLayer(tileURL, {
 }).addTo(map);
 
 //var featureLayer = L.mapbox.featureLayer().loadURL('{{ site.baseurl }}/events.geojson',{
-var featureLayer = L.mapbox.featureLayer().loadURL('https://o5sxlalqle.execute-api.us-east-1.amazonaws.com/dev/events_geojson',{  style: L.mapbox.simplestyle.style })
+var featureLayer = L.mapbox.featureLayer().loadURL('https://nl711prwcg.execute-api.us-east-1.amazonaws.com/dev/events_geojson',{  style: L.mapbox.simplestyle.style })
 //var featureLayer = L.geoJson(geojson, { style: L.mapbox.simplestyle.style }).addTo(map);
 
 featureLayer.addTo(map);
