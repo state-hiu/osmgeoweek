@@ -165,34 +165,47 @@ fetch('https://o5sxlalqle.execute-api.us-east-1.amazonaws.com/dev/events').then(
             console.log('response is ok');
             events = json;
             console.log('print events');
+            console.log(events);
             console.log(events.length);
             //initialize();
 
-            events.sort(function(a,b){
+            const filter = events.filter(checkDates);
+
+            function checkDates(a) {
+                return new Date(a.date).getTime() > 0;
+            }
+
+            console.log('print filter');
+            console.log(filter);
+
+            filter.sort(function(a,b){
+
+              if(isNaN(new Date(a.date).getTime())) { 
+                return 1-isNaN(new Date(b.date).getTime());
+              } else {
+                return (new Date(b.date).getTime()) - (new Date(a.date).getTime()); 
+              }
               // Turn your strings into dates, and then subtract them
               // to get a value that is either negative, positive, or zero.
-              return new Date(b.date) - new Date(a.date);
+              
             });
 
             document.querySelector('#event_counter').textContent = events.length;
 
-
           for (i = 0; i < 3; i++) {
 
-                console.log(events[i]);
+                console.log(filter[i]);
 
                 var t = document.querySelector('#mytemplate');
 
-
-                t.content.querySelector('#title').textContent = events[i].event_name;
-                t.content.querySelector('#date').textContent = events[i].date;
+                t.content.querySelector('#title').textContent = filter[i].event_name;
+                t.content.querySelector('#date').textContent = filter[i].date;
 
                 // add to document DOM
                 var clone = document.importNode(t.content, true); // where true means deep copy
                 document.querySelector('#insert3events').appendChild(clone);
 
             }
-
 
         });
     } else {
