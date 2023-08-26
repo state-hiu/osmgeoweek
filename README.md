@@ -1,1 +1,1 @@
-# osmgeoweek-2020
+# osmgeoweek
