@@ -8,7 +8,7 @@ twitter-description: Sign up for an event near you or plan your own mapathon. Yo
   <div class='limiter'>
     <div class='pad2y'>
       <h1 class='space-bottom1 space-top4'>Events</h1>
-      <p class='prose-big'> Find an event near you. Or, let us know if you are <a style="color:black" href="mailto:osmgeoweek@gmail.com">planning an event</a>, <a style="color:black" href="https://docs.google.com/forms/d/e/1FAIpQLSd0o_FrsoGlpqKlG9q1WumFV8sW8P9yhH4Udln_1fQbYjXn9A/viewform">submit the details</a> or <a style="color:black" href="mailto:osmgeoweek@gmail.com">get in touch</a>!</p>
+      <p class='prose-big'> Find an event near you. Or, let us know if you are <a style="color:black" href="mailto:info@teachosm.org ">planning an event</a>, <a style="color:black" href="https://docs.google.com/forms/d/e/1FAIpQLSd0o_FrsoGlpqKlG9q1WumFV8sW8P9yhH4Udln_1fQbYjXn9A/viewform">submit the details</a> or <a style="color:black" href="mailto:info@teachosm.org ">get in touch</a>!</p>
     </div>
   </div>
 </div>
@@ -41,7 +41,7 @@ var events;
 // use fetch to retrieve it, and report any errors that occur in the fetch operation
 // once the products have been successfully loaded and formatted as a JSON object
 // using response.json(), run the initialize() function
-fetch('https://o5sxlalqle.execute-api.us-east-1.amazonaws.com/dev/events').then(function(response) {
+fetch('https://script.google.com/macros/s/AKfycbxqU4I_53-7iFrC88cO9pSYupPVxjs83Mi5uXIB8ilSTMXjkLrtXmu0QcApZh2NfQky/exec').then(function(response) {
     if (response.ok) {
         response.json().then(function(json) {
             console.log('response is ok');
@@ -64,16 +64,16 @@ fetch('https://o5sxlalqle.execute-api.us-east-1.amazonaws.com/dev/events').then(
 
                 // set
                 //t.content.querySelector('img').src = 'demo.png';
-                t.content.querySelector('#title').textContent = events[i].event_name;
+                t.content.querySelector('#title').textContent = events[i].name;
                 t.content.querySelector('#location').textContent = events[i].location;
                 t.content.querySelector('#country').textContent = events[i].country;
                 //t.content.querySelector('#time').textContent = events[i].start_time;
                 t.content.querySelector('#date').textContent = events[i].date;
                 //t.content.querySelector('#organization').textContent = events[i].org_name;
-                t.content.querySelector('#sign_up_link').textContent = events[i].sign_up_link;
+                t.content.querySelector('#sign_up_link').textContent = events[i].link;
 
                 // https://www.digitalocean.com/community/tutorials/how-to-modify-attributes-classes-and-styles-in-the-dom
-                t.content.querySelector('#sign_up_link').setAttribute('href', events[i].sign_up_link);
+                t.content.querySelector('#sign_up_link').setAttribute('href', events[i].link);
 
                 console.log('print date');
                 console.log(events[i].date);

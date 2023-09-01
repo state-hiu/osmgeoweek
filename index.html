@@ -4,6 +4,13 @@ title: OSM GeoWeek
 twitter-description: Sign up for an event near you or plan your own mapathon. You can contribute to mapping projects around the world and explore the power of maps! Get in touch, we're happy to help!
 ---
 
+<!-- <script>
+  const myVar = "{{ site.api }}";
+  console.log('print myVar');
+  console.log(myVar);  // Outputs: "Hello, Jekyll!"
+</script> -->
+
+
 <!-- <section class='hide-mobile contain'>
   <div class='liner clearfix center fill-darken2 dark pin-top col12'>
     <h2 class='pad2'>
@@ -36,7 +43,7 @@ twitter-description: Sign up for an event near you or plan your own mapathon. Yo
     <div class='limiter pin-bottom space-bottom8'>
 
      <h1 class='space-bottom1'>OSM Geography <span class='text-green'>Awareness</span> Week</h1>
-    <p class='prose-big space-bottom1'>Nov 14-19, 2022</p>
+    <p class='prose-big space-bottom1'>Nov 13-17, 2023</p>
     <p class='col10 margin2r'>Teachers, students, community groups, and map lovers around the world join together to celebrate geography and make maps with <a href="http://www.openstreetmap.org/about"><strong><span class='text-green'>OpenStreetMap</span></strong></a>, the free and openly editable map of the world.</p>
 
     <div style="display:inline" tx-content="translate_urls">
@@ -44,7 +51,8 @@ twitter-description: Sign up for an event near you or plan your own mapathon. Yo
     </div>
 
     <div style="display:inline" tx-content="translate_urls" >
-    <a tx-content="translate_urls" style="font-size: 16px" href="https://docs.google.com/forms/d/e/1FAIpQLSf6F0v1zy7HVL6OuUhpWl0bK6Rz-Bmhp6lrT_4BKZ3yFcIl3Q/viewform?usp=sf_link" class='pad2x button fill-bold-green'>Submit an event</a>
+    <!-- <a tx-content="translate_urls" style="font-size: 16px" href="https://docs.google.com/forms/d/e/1FAIpQLSf6F0v1zy7HVL6OuUhpWl0bK6Rz-Bmhp6lrT_4BKZ3yFcIl3Q/viewform?usp=sf_link" class='pad2x button fill-bold-green'>Submit an event</a> -->
+    <a tx-content="translate_urls" style="font-size: 16px" href="{{site.baseurl}}/form/" class='pad2x button fill-bold-green'>Submit an event</a>
     </div>
 
     </div>
@@ -74,7 +82,9 @@ twitter-description: Sign up for an event near you or plan your own mapathon. Yo
 <span class="notranslate" id="event_counter"></span> 
 
 <div style="display:inline" tx-content="translate_urls">
-<a href="{{site.baseurl}}/events/">events</a> at local schools and community centers or virtually during <strong>#osmgeoweek</strong>. If you are organizing an event, or even just thinking about it, get in touch at <a href='mailto:osmgeoweek@gmail.com'>osmgeoweek@gmail.com</a>. We are excited to host a number of career panels and skill sharing activities this year. If you are interested in sharing at either, please reach out and we’ll connect you to an organizer. If you are a young person just starting your career and you are interested in sharing your story please reach out. We’ll be hosting career panels in English, French, Spanish and Portuguese and are looking for panelists.
+<a href="{{site.baseurl}}/events/">events</a> at local schools and community centers or virtually during <strong>#osmgeoweek</strong>. 
+If you are organizing an event, or even just thinking about it, get in touch at <a href='mailto:info@teachosm.org '>info@teachosm.org </a>.
+ We are excited to host a number of career panels and skill sharing activities this year. If you are interested in sharing at either, please reach out and we’ll connect you to an organizer. If you are a young person just starting your career and you are interested in sharing your story please reach out. We’ll be hosting career panels in English, French, Spanish and Portuguese and are looking for panelists.
 </div>
 
 </p>
@@ -85,7 +95,7 @@ twitter-description: Sign up for an event near you or plan your own mapathon. Yo
 The <a href="{{site.baseurl}}/plan/">Guides</a> are a collection of resources for planning and hosting a local event, and for participants at the event to learn and contribute to OSM. We are also supporting <a href="http://teachosm.org/">TeachOSM</a>, a resource for educators to bring OSM into the classroom.
 </p> -->
 
-<p>Follow <a href="https://twitter.com/search?q=%23osmgeoweek&src=typd"><strong>#osmgeoweek</strong></a> on twitter for updates during the week, and share your experiences using the <strong>#osmgeoweek</strong> hashtag. When editing in OpenStreetMap add the <strong>#osmgeoweek2022</strong> hashtag to your changesets to be included in the metrics. For more details about the program and history of Geography Awareness Week, visit the <a href="https://www.nationalgeographic.org/idea/celebrate-geography-awareness-week/">National Geographic Education page</a>. 
+<p>Follow <a href="https://twitter.com/search?q=%23osmgeoweek&src=typd"><strong>#osmgeoweek</strong></a> on twitter for updates during the week, and share your experiences using the <strong>#osmgeoweek</strong> hashtag. When editing in OpenStreetMap add the <strong>#osmgeoweek2023</strong> hashtag to your changesets to be included in the metrics. For more details about the program and history of Geography Awareness Week, visit the <a href="https://www.nationalgeographic.org/idea/celebrate-geography-awareness-week/">National Geographic Education page</a>. 
 
 </div>
   <div class='col12'>
@@ -159,7 +169,7 @@ var events;
 // use fetch to retrieve it, and report any errors that occur in the fetch operation
 // once the products have been successfully loaded and formatted as a JSON object
 // using response.json(), run the initialize() function
-fetch('https://o5sxlalqle.execute-api.us-east-1.amazonaws.com/dev/events').then(function(response) {
+fetch('{{ site.api }}').then(function(response) {
     if (response.ok) {
         response.json().then(function(json) {
             console.log('response is ok');
@@ -198,8 +208,24 @@ fetch('https://o5sxlalqle.execute-api.us-east-1.amazonaws.com/dev/events').then(
 
                 var t = document.querySelector('#mytemplate');
 
-                t.content.querySelector('#title').textContent = filter[i].event_name;
-                t.content.querySelector('#date').textContent = filter[i].date;
+                t.content.querySelector('#title').textContent = filter[i].name;
+
+                const date = new Date(filter[i].date);
+                console.log('print new date');
+                console.log(date);
+
+                const year = date.getUTCFullYear();
+                console.log('print year');
+                console.log(year);
+                const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+                const monthName = months[date.getUTCMonth()];
+                const day = date.getUTCDate();
+
+                const formattedDate = `${monthName} ${day}, ${year}`;
+                console.log('print formattedDate');
+                console.log(formattedDate);
+
+                t.content.querySelector('#date').textContent = formattedDate;
 
                 // add to document DOM
                 var clone = document.importNode(t.content, true); // where true means deep copy

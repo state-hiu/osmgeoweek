@@ -1,7 +1,7 @@
 <div id="map" style="min-height: 350px;"></div>
 
 <script>
-L.mapbox.accessToken = 'pk.eyJ1IjoiaGl1IiwiYSI6InJWNGZJSzgifQ.xK1ndT3W8XL9lwVZrT6jvQ';
+L.mapbox.accessToken = 'pk.eyJ1IjoidGdlcnRpbiIsImEiOiJYTW5sTVhRIn0.X4B5APkxkWVaiSg3KqMCaQ';
 var map = L.mapbox.map('map',  null, { infoControl: false, attributionControl: true, minZoom: 2,
       maxZoom: 16, scrollWheelZoom: false });
 // map.attributionControl.setPrefix('');
@@ -13,29 +13,43 @@ map.once('focus', function() { map.scrollWheelZoom.enable(); });
 //     attribution: '<a href="http://osm.org/copyright">&copy; OpenStreetMap contributors</a>'
 // }).addTo(map);
 
-var tileURL = L.Browser.retina ? "https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaGl1IiwiYSI6InJWNGZJSzgifQ.xK1ndT3W8XL9lwVZrT6jvQ" : "https://api.mapbox.com/styles/v1/mapbox/dark-v10/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaGl1IiwiYSI6InJWNGZJSzgifQ.xK1ndT3W8XL9lwVZrT6jvQ";
+var tileURL = L.Browser.retina ? "https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoidGdlcnRpbiIsImEiOiJYTW5sTVhRIn0.X4B5APkxkWVaiSg3KqMCaQ" : "https://api.mapbox.com/styles/v1/mapbox/dark-v10/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoidGdlcnRpbiIsImEiOiJYTW5sTVhRIn0.X4B5APkxkWVaiSg3KqMCaQ";
 L.tileLayer(tileURL, {
     attribution:'<a href="https://www.mapbox.com/about/maps">© Mapbox</a> <a href="http://openstreetmap.org/copyright">© OpenStreetMap</a>'
 }).addTo(map);
 
 //var featureLayer = L.mapbox.featureLayer().loadURL('{{ site.baseurl }}/events.geojson',{
-var featureLayer = L.mapbox.featureLayer().loadURL('https://o5sxlalqle.execute-api.us-east-1.amazonaws.com/dev/events_geojson',{  style: L.mapbox.simplestyle.style })
-//var featureLayer = L.geoJson(geojson, { style: L.mapbox.simplestyle.style }).addTo(map);
+//var featureLayer = L.mapbox.featureLayer().loadURL('https://o5sxlalqle.execute-api.us-east-1.amazonaws.com/dev/events_geojson',{  style: L.mapbox.simplestyle.style })
+// Fetch data from the API
+fetch('{{ site.api }}')
+    .then(response => response.json())
+    .then(data => {
+        // Convert each data item's 'files' string to a JSON object
+        const geojsonFeatures = data.map(item => JSON.parse(item.files));
 
-featureLayer.addTo(map);
+        // Add the geojson data to the map
+        var featureLayer = L.mapbox.featureLayer()
+            .setGeoJSON(geojsonFeatures)
+            .addTo(map)
+            .setStyle(L.mapbox.simplestyle.style);
 
- featureLayer.on('ready', function() {
-  map.fitBounds(featureLayer.getBounds());
-});
-featureLayer.on('layeradd', function(e) {
-  var marker = e.layer,
-  feature = marker.feature;
-  // Create custom popup content
-  var popupContent = '<h2 class="text-center" style="color: #8cc250">'+feature.properties.event_name+'</h2>';
-  // http://leafletjs.com/reference.html#popup
-  marker.bindPopup(popupContent,{
-    minWidth: 200,
-    closeButton: false,
-  });
-}); 
+        // Adjust map view
+        map.fitBounds(featureLayer.getBounds());
+
+        // Attach a popup to each marker
+        featureLayer.eachLayer(function(layer) {
+            const properties = layer.feature.properties;
+            const popupContent = '<h2 class="text-center" style="color: #8cc250">' + (properties.event_name || 'No Event Name') + '</h2>';
+            layer.bindPopup(popupContent, {
+                minWidth: 200,
+                closeButton: false,
+            });
+        });
+    })
+    .catch(error => {
+        console.error('There was an error fetching data from the API:', error);
+    });
+
+
+
 </script>
