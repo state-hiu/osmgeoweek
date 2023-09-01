@@ -55,7 +55,7 @@ title: Submit Your OSM GeoWeek Event!!
 
 $(document).ready(function(){
 
-  console.log('inside document ready4x');
+  console.log('inside document ready4x2');
 
 
   $('#sandbox-container input').datepicker({
@@ -758,7 +758,7 @@ $("#form").submit(function(event){
         console.log('done, display result: e');
         console.log(e);
         // Check if the server indicates a successful operation
-        if (e.success) {
+        if (e.result) {
             $(".jf-thankyou").show();
         } else {
             console.error("Server responded, but indicated an error:", e.message);
