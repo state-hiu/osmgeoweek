@@ -22,6 +22,7 @@ title: Submit Your OSM GeoWeek Event!!
 <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.4.2/mapbox-gl-draw.js"></script>
 
 <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+<script src='https://www.google.com/recaptcha/api.js'></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
@@ -755,7 +756,12 @@ $("#form").submit(function(event){
       .done( function(e) {
         console.log('done, display result: e');
         console.log(e);
-        $(".jf-thankyou").show();
+        // Check if the server indicates a successful operation
+        if (e.success) {
+            $(".jf-thankyou").show();
+        } else {
+            console.error("Server responded, but indicated an error:", e.message);
+        }
       })
       .fail(function(jqXHR, textStatus, errorThrown) {
         console.error("Request failed: " + textStatus);
