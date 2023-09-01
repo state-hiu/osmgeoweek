@@ -55,7 +55,7 @@ title: Submit Your OSM GeoWeek Event!!
 
 $(document).ready(function(){
 
-  console.log('inside document ready7');
+  console.log('inside document ready4');
 
 
   $('#sandbox-container input').datepicker({
@@ -735,7 +735,7 @@ $("#form").submit(function(event){
             "description": "user_created_geojson",
             "public": true,
             "files": JSON.stringify(data_geojson),
-            "g-recaptcha-response": recaptchaVar
+            "recaptcha": recaptchaVar
           }
       }
 

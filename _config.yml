@@ -1,7 +1,7 @@
 baseurl: ''
 #exclude: [src, CNAME, "2012", "2013"]
 #markdown: kramdown
-api: 'https://script.google.com/macros/s/AKfycbwzCkuVB4AONNCguNQalomUjHbDOxXAlk6CI0rA76KvwBWurfrQ-4c82WQhnYhONCdC/exec'
+api: 'https://script.google.com/macros/s/AKfycbxb4oliX_CstpH_6CfLcoGNfbqWFmrKWEIo8eizrJgNjO3KtNKzZz4F8mOQkDBRmySI/exec'
 
 future: true
 
