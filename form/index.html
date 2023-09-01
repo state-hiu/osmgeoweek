@@ -756,7 +756,12 @@ $("#form").submit(function(event){
         console.log('done, display result: e');
         console.log(e);
         $(".jf-thankyou").show();
-      });
+      })
+      .fail(function(jqXHR, textStatus, errorThrown) {
+      console.error("Request failed: " + textStatus);
+      console.error("Error thrown: " + errorThrown);
+      console.error(jqXHR);
+  });
 
     //     request = $.ajax({
     //         url: "https://script.google.com/macros/s/AKfycbyZ7grQaH1ixo-qfB9su3l1YJQPf4_MdxlK9LTP3bDs7yQYzx2r/exec",
