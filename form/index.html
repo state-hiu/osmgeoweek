@@ -451,7 +451,8 @@ $(document).ready(function(){
             <br>
             <label class="" for="c2">A link where people can go to sign up (Eventbrite, Meetup, Facebook etc). URLs need to start with "http://" or "https://"</label>
 
-            <input type="text" class="form-control" id="link" name="link" value=""     />
+            <input type="url" class="form-control" id="link" name="link" value="" placeholder="https://example.com" />
+
             
         </div>
 
@@ -687,6 +688,36 @@ $("#form").submit(function(event){
       event.preventDefault();
       return false;
     }
+
+    // to correct link format if necessary
+
+    function isValidUrl(string) {
+        try {
+            new URL(string);
+            return true;
+        } catch (_) {
+            return false;
+        }
+    }
+
+    let linkInput = document.getElementById('link');
+    let linkValue = linkInput.value;
+    console.log('link value is');
+    console.log(linkValue);
+
+    if (linkValue && !linkValue.startsWith('http://') && !linkValue.startsWith('https://')) {
+        linkValue = 'https://' + linkValue;
+        linkInput.value = linkValue; // Update the input value
+    }
+    console.log('updated link value is');
+    console.log(linkValue);
+
+    // If the URL is still not valid after your modifications, prevent form submission
+    if (!isValidUrl(linkValue)) {
+        event.preventDefault();
+        alert('Please provide a valid URL. URLs need to start with "http://" or "https://"');
+    }
+
 
     // setup some local variables
     var $form = $(this);
