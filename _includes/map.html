@@ -24,8 +24,12 @@ L.tileLayer(tileURL, {
 fetch('{{ site.api }}')
     .then(response => response.json())
     .then(data => {
-        // Convert each data item's 'files' string to a JSON object
-        const geojsonFeatures = data.map(item => JSON.parse(item.files));
+        // Convert each data item's 'files' string to a JSON object and include the name
+        const geojsonFeatures = data.map(item => {
+            const geojson = JSON.parse(item.files);
+            geojson.properties.name = item.name;  // Add the name to the properties object
+            return geojson;
+        });
 
         // Add the geojson data to the map
         var featureLayer = L.mapbox.featureLayer()
@@ -36,15 +40,17 @@ fetch('{{ site.api }}')
         // Adjust map view
         map.fitBounds(featureLayer.getBounds());
 
+
         // Attach a popup to each marker
         featureLayer.eachLayer(function(layer) {
             const properties = layer.feature.properties;
-            const popupContent = '<h2 class="text-center" style="color: #8cc250">' + (properties.event_name || 'No Event Name') + '</h2>';
+            const popupContent = '<h2 class="text-center" style="color: #8cc250">' + (properties.name || 'No Event Name') + '</h2>';
             layer.bindPopup(popupContent, {
                 minWidth: 200,
                 closeButton: false,
             });
         });
+
     })
     .catch(error => {
         console.error('There was an error fetching data from the API:', error);

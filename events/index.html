@@ -68,8 +68,24 @@ fetch('https://script.google.com/macros/s/AKfycbxqU4I_53-7iFrC88cO9pSYupPVxjs83M
                 t.content.querySelector('#location').textContent = events[i].location;
                 t.content.querySelector('#country').textContent = events[i].country;
                 //t.content.querySelector('#time').textContent = events[i].start_time;
-                t.content.querySelector('#date').textContent = events[i].date;
-                //t.content.querySelector('#organization').textContent = events[i].org_name;
+
+                //format date
+                const date = new Date(events[i].date);
+                console.log('print new date');
+                console.log(date);
+
+                const year = date.getUTCFullYear();
+                console.log('print year');
+                console.log(year);
+                const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+                const monthName = months[date.getUTCMonth()];
+                const day = date.getUTCDate();
+
+                const formattedDate = `${monthName} ${day}, ${year}`;
+
+
+                t.content.querySelector('#date').textContent = formattedDate;
+                t.content.querySelector('#organization').textContent = events[i].org;
                 t.content.querySelector('#sign_up_link').textContent = events[i].link;
 
                 // https://www.digitalocean.com/community/tutorials/how-to-modify-attributes-classes-and-styles-in-the-dom
@@ -117,7 +133,7 @@ fetch('https://script.google.com/macros/s/AKfycbxqU4I_53-7iFrC88cO9pSYupPVxjs83M
 
 
     <div class='prose schedule'>
-      <!--<div>organization: <span id="organization"></span></div>-->
+      <div>organization: <span id="organization"></span></div>
       <div>sign-up: <a id="sign_up_link"><span id="sign_up_link"></span></a></div>
     </div>
 
