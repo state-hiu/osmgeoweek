@@ -75,7 +75,7 @@ Sample Tweets:
 
 -   Local maps need a #datarevolution: #openmapping creates much needed map data and offers an accessible #tech skill #OSMGeoWeek
 
-Shareables Graphics
+Shareable Graphics
 ---------------------------------
 
 Browse and download all of the 2023 graphics [here](https://drive.google.com/drive/folders/1opUwm2a7H3EOiHXQi2CvyvNoVIUJyBJD?usp=drive_link)
