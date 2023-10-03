@@ -5,6 +5,7 @@ permalink: guides/validation
 title: Learn to Validate! Guide from Missing Maps
 tags:
   - mapper
+  - notfeatured
 ---
 
 ## Visit Missing Maps's [Learn to Validate page](http://www.missingmaps.org/validate/)
