@@ -7,15 +7,14 @@ tags:
   - planner
 ---
 
+This guide is for OSM leaders, mapping event organizers (and potential event organizers!), mappers who are interested in spreading the word, and anyone you know with a social media platform that could reach a potentially interested audience! 
+
 What is #OSMGeoWeek?
 ---------------------------------------------
 
 OpenStreetMap Geography Awareness Week is a yearly tradition that coincides with Geography Awareness Week introduce and promote OpenStreetMap as a powerful tool for development and humanitarian related efforts. This week is an exciting show of force of the OpenStreetMap community that highlights its global reach and potential for positive impact, while being a great way to connect with local communities (including your own!) around the world.
 
 Participants will be encouraged to contribute key open mapping data to a smaller number of highlighted projects focusing on development and humanitarian needs, or to organize a mapping event that suits their own data needs. 
-
-## Purpose of this toolkit
-This guide is for OSM leaders, mapping event organizers (and potential event organizers!), mappers who are interested in spreading the word, and anyone you know with a social media platform that could reach a potentially interested audience! 
 
 ## Essentials:
 
