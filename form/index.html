@@ -842,6 +842,9 @@ $("#form").submit(function(event){
 
     // Prevent default posting of form
     // event.preventDefault();
+    
+    // After successful form submission, remove the beforeunload listener
+    window.removeEventListener('beforeunload', beforeUnloadListener);
 
 });
 
