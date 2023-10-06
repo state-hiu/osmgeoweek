@@ -641,12 +641,19 @@ $(document).ready(function(){
 const navControl = new maplibregl.NavigationControl({ showCompass: false });
 map.addControl(navControl, 'top-right');  // 'top-left' is the default position
 
+// Define the beforeunload listener function
+function beforeUnloadListener(e) {
+    e.preventDefault();
+    event.returnValue = 'Are you sure you want to leave?';
+}
+
+window.addEventListener('beforeunload', beforeUnloadListener);
 
 //debugging
-window.addEventListener("beforeunload", function(event) {
-    event.preventDefault();
-    event.returnValue = 'Are you sure you want to leave?';
-});
+// window.addEventListener("beforeunload", function(event) {
+//     event.preventDefault();
+//     event.returnValue = 'Are you sure you want to leave?';
+// });
 
 $(document)
   .ajaxStart(function () {
@@ -842,7 +849,8 @@ $("#form").submit(function(event){
 
     // Prevent default posting of form
     // event.preventDefault();
-    
+
+    console.log('removing beforeUnloadListener');
     // After successful form submission, remove the beforeunload listener
     window.removeEventListener('beforeunload', beforeUnloadListener);
 
